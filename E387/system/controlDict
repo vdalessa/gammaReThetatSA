@@ -1,0 +1,155 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     simpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+//stopAt          writeNow;
+stopAt          endTime;
+
+endTime         5000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   1000;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression uncompressed;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+graphFormat     raw;
+
+libs ("libUnivpmRASModels.so");
+
+functions
+{
+   forces
+   {
+          type forces;
+          functionObjectLibs ("libforces.so");
+          patches (w_dw w_up);
+          pName p;
+          UName U;
+          rhoName rhoInf;
+          rhoInf 1;
+          CofR (0.25 0 0); // Origin for moment calculations
+          outputControl timeStep;
+          outputInterval 1;
+   }
+//
+forceCoeffs
+{
+    type                forceCoeffs;
+    functionObjectLibs  ( "libforces.so" );
+    outputControl       timeStep;
+    outputInterval      1;
+
+    patches             ( w_dw w_up );
+    pName               p;
+    UName               U;
+    rhoName             rhoInf;
+    log                 true;
+
+//    liftDir             (0.0348994967	0.999390827 0);		// -2 deg
+//    dragDir             (0.999390827	-0.0348994967 0);
+    liftDir             (0 1 0);	// 0 deg
+    dragDir             (1 0 0);
+//    liftDir             (-0.0174524064	0.9998476952 0);	// 1 deg
+//    dragDir             (0.9998476952	0.0174524064 0);
+//    liftDir             (-0.0348994967	0.999390827 0);		// 2 deg
+//    dragDir             (0.999390827	0.0348994967 0);
+//    liftDir             (-0.0523359562	0.9986295348 0);	// 3 deg
+//    dragDir             (0.9986295348	0.0523359562 0);
+//    liftDir             (-0.0697564737	0.9975640503 0);	// 4 deg
+//    dragDir             (0.9975640503	0.0697564737 0);
+//    liftDir             (-0.0697564737	0.9975640503 0);	// 5 deg
+//    dragDir             (0.9961946981	0.0871557427 0);
+//    liftDir             (-0.1045284633	0.9945218954 0);	// 6 deg
+//    dragDir             (0.9945218954	0.1045284633 0);
+//    liftDir             (-0.1218693434	0.9925461516 0);	// 7 deg
+//    dragDir             (0.9925461516	0.1218693434 0);
+//    liftDir             (-0.1391731010	0.9902680687 0);	// 8 deg
+//    dragDir             (0.9902680687	0.139173101 0);
+//    liftDir             (-0.1564344650	0.9876883406 0);	// 9 deg
+//    dragDir             (0.9876883406	0.156434465 0);
+//    liftDir             (-0.1736481777	0.984807753 0);		// 10 deg
+//    dragDir             (0.984807753	0.1736481777 0);
+//    liftDir             (-0.1908089954	0.9816271834 0);	// 11 deg
+//    dragDir             (0.9816271834	0.1908089954 0);
+//    liftDir             (-0.2079116908	0.9781476007 0);	// 12 deg
+//    dragDir             (0.9781476007	0.2079116908 0);
+//    liftDir             (-0.2249510543	0.9743700648 0);	// 13 deg
+//    dragDir             (0.9743700648	0.2249510543 0);
+//    liftDir             (-0.2419218956	0.9702957263 0);	// 14 deg
+//    dragDir             (0.9702957263	0.2419218956 0);
+//    liftDir             (-0.2588190451	0.9659258263 0);	// 15 deg
+//    dragDir             (0.9659258263	0.2588190451 0);
+//    liftDir             (-0.2756373558	0.9612616959 0);	// 16 deg
+//    dragDir             (0.9612616959	0.2756373558 0);
+//    liftDir             (-0.2923717047	0.956304756 0);		// 17 deg
+//    dragDir             (0.956304756	0.2923717047 0);
+//    liftDir             (-0.3090169944	0.9510565163 0);	// 18 deg
+//    dragDir             (0.9510565163	0.3090169944 0);
+//    liftDir             (-0.3255681545	0.9455185756 0);	// 19 deg
+//    dragDir             (0.9455185756	0.3255681545 0);
+//    liftDir             (-0.3420201433	0.9396926208 0);	// 20 deg
+//    dragDir             (0.9396926208	0.3420201433 0);
+//    liftDir             (-0.3583679495	0.9335804265 0);	// 21 deg
+//    dragDir             (0.9335804265	0.3583679495 0);
+//    liftDir             (-0.3746065934	0.9271838546 0);	// 22 deg
+//    dragDir             (0.9271838546	0.3746065934 0);
+//    liftDir             (-0.3907311285	0.9205048535 0);	// 23 deg
+//    dragDir             (0.9205048535	0.3907311285 0);
+//    liftDir             (-0.4067366431	0.9135454576 0);	// 24 deg
+//    dragDir             (0.9135454576	0.4067366431 0);
+//    liftDir             (-0.4226182617	0.906307787 0);		// 25 deg
+//    dragDir             (0.906307787	0.4226182617 0);
+//    liftDir             (-0.4383711468	0.8987940463 0);	// 26 deg
+//    dragDir             (0.8987940463	0.4383711468 0);
+//    liftDir             (-0.4539904997	0.8910065242 0);	// 27 deg
+//    dragDir             (0.8910065242	0.4539904997 0);
+//    liftDir             (-0.4694715628	0.8829475929 0);	// 28 deg
+//    dragDir             (0.8829475929	0.4694715628 0);
+//    liftDir             (-0.4848096202	0.8746197071 0);	// 29 deg
+//    dragDir             (0.8746197071	0.4848096202 0);
+//    liftDir             (-0.5	0.8660254038 0);			// 30 deg
+//    dragDir             (0.8660254038	0.5 0);
+    CofR                (0.25 0 0); 					// 1/4 di corda
+    pitchAxis           (0 0 1);
+
+    magUInf             1.00;
+    rhoInf              1.0;
+    lRef                1;
+    Aref                0.001;
+}
+}
+// ************************************************************************* //
