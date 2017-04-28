@@ -1,0 +1,4 @@
+gammaReThetatSAJ/gammaReThetatSAJ.C
+
+LIB = $(FOAM_USER_LIBBIN)/libUnivpmRASModels
+
