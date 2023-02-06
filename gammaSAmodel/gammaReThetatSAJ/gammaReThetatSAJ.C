@@ -767,7 +767,7 @@ void gammaReThetatSAJ::correct()
       - Cb2_/sigmaNut_*magSqr(fvc::grad(nuTilda_))
      ==
         fvm::Sp(gammaEff*Cb1_*Stilda, nuTilda_) 
-       -fvm::Sp(  max( min(gamma_ , scalar(0.5)) , 1.0  ) *  Cw1_*fw(Stilda)*nuTilda_/sqr(y_), nuTilda_)
+       -fvm::Sp( Cw1_*fw(Stilda)*nuTilda_/sqr(y_), nuTilda_)
     );
     nuTildaEqn().relax();
     solve(nuTildaEqn);
